@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        background-color: #000000;
+        overflow: hidden;
+        display: grid;
+        place-content: center;
+        height: 100vh;
+    }
+    h1{
+        color: #c9c9c969;
+        position: relative;
+        z-index: 2;
+        font-size: 4vw sans-serif;
+    }
+    h2{
+        color: #fffefe;
+        position: relative;
+        z-index: 2;
+        font-size: 4vw sans-serif;
+    }
+    h1:after{
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgb(52, 238, 255)0%,rgba(60, 255, 0, 0.95)100%);
+    }
+    h2:after{
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom,rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 0.95) 100%);    
+    }
+    .line{
+        --line-height: 80px;
+        --line-blue:rgba(110, 245, 255, 0.645);
+        position: absolute;
+        left: var(--left);
+        width: 1px;
+        height: 100vh;
+        z-index: 1;
+    }
+    .line::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: var(--line-height);
+        background: linear-gradient(to bottom, transparent, var(--line-blue));
+        animation: fall var(--ani-duration) var(--ani-delay) linear infinite;
+    }
+    @keyframes fall {
+        0%{
+            top: -100px;
+        }
+        100%{
+            top:100%;
+        }
+    }
+</style>
+<body>
+    <h1>娜比好累(╥﹏╥)</h1>
+    <h2>娜比好累(╥﹏╥)</h2>
+</body>
+<script>
+    const lineCount = 20; // 線條數量
+
+    for(let i = 1; i <= lineCount; i++){
+        const line = document.createElement('div'); // add div元素
+        line.classList.add('line'); // add class
+        console.log(line);
+
+        // 隨機線條位置
+        const leftPosition = `${i * (100 / lineCount) + Math.random() * 5 -5}%`;
+        line.style.setProperty('--left',leftPosition);
+        console.log('left position:',leftPosition);
+        
+        // 隨機動畫時間
+        const aniDuration = 8 + Math.random() * 10 + 's'
+        line.style.setProperty('--ani-duration', aniDuration);
+        console.log('ani-duration:', aniDuration);
+        
+        const aniDelay = -Math.random() * 10 + 's';
+        line.style.setProperty('--ani-delay', aniDelay);
+        console.log('ani-delay', aniDelay);
+
+        document.body.appendChild(line); // add到body
+    }
+</script>
+
+</html>
